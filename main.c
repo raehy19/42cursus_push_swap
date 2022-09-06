@@ -23,6 +23,13 @@ typedef struct s_node
 	int	absolute_weight;
 }	t_node;
 
+int	ft_abs(int n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
+}
+
 int	ft_order(int val, int n)
 {
 	if (val < 0)
@@ -33,6 +40,8 @@ int	ft_order(int val, int n)
 
 int	ft_weight(int val, int n)
 {
+	if (val < 0 && -val > (n / 2))
+		return (n + val);
 	if (val > (n / 2))
 		return (n - val);
 	return (val);
@@ -41,10 +50,11 @@ int	ft_weight(int val, int n)
 void	ft_find_target_order(t_node *list_a, int n)
 {
 	int	*weight_sum;
-	int i;
-	int j;
+	int	temp;
+	int	i;
+	int	j;
 
-	weight_sum = (int *) malloc( sizeof(int) * n)
+	weight_sum = (int *) malloc( sizeof(int) * n);
 	i = -1;
 	while (++i < n)
 		*(weight_sum + i) = 0;
@@ -54,15 +64,39 @@ void	ft_find_target_order(t_node *list_a, int n)
 		j = -1;
 		while (++j < n)
 		{
-			(*(list_a + j)).target_order = ft_order(j - i, n);
-			*(weight_sum + i) += ft_weight((*(list_a + j)).order - (*(list_a + j)).target_order, n);
+			*(weight_sum + i) += ft_abs(ft_weight((list_a + j)->order - ft_order(j - i, n), n));
 		}
+	}
+
+	// debug
+	for (int k = 0; k < n; ++k)
+	{
+		printf("%d\n", *(weight_sum + k));
+	}
+
+	i = -1;
+	temp = n * n;
+	while (++i < n)
+	{
+		if (ft_abs(*(weight_sum + i)) < temp)
+		{
+			temp = ft_abs(*(weight_sum + i));
+			j = i;
+		}
+	}
+	printf("\nj: %d\n", j);
+	i = -1;
+	while (++i < n)
+	{
+		(list_a + i)->target_order = ft_order(i - j, n);
+		(list_a + i)->weight = ft_weight((list_a + i)->order - (list_a + i)->target_order, n);
+		(list_a + i)->absolute_weight = ft_abs((list_a + i)->weight);
 	}
 }
 
 int	main(void)
 {
-	int n = 20;
+	int n = 10;
 	t_node *list_a;
 	int temp;
 
@@ -86,7 +120,7 @@ int	main(void)
 	}
 
 
-
+	ft_find_target_order(list_a, n);
 
 	printf("data\t\torder\t\ttarget_order\tweight\t\tabsolute_weight\t\t\n");
 	for (int i = 0; i < n; ++i)
