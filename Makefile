@@ -17,7 +17,7 @@ CFLAGS := -Wall -Wextra -Werror
 RM := rm -f
 
 PUSH_SWAP_SRCS := \
-	main.c \
+	push_swap.c \
 
 PUSH_SWAP_SRCS_BONUS := \
 
@@ -44,6 +44,9 @@ $(NAME) : $(PUSH_SWAP_OBJS)
 	$(CC) -o $@ $^
 
 $(BONUS_NAME) : $(PUSH_SWAP_OBJS_BONUS)
+
+run : $(NAME)
+	./$(NAME)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
