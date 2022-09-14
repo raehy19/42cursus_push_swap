@@ -120,10 +120,9 @@ void	ft_find_target_order(t_node *list_a, int n)
 
 int	main(void)
 {
-	int n = 20;
+	int n = 500;
 	t_node *list_a;
 	int temp;
-
 
 	//rand
 	srand(time(NULL));
@@ -151,7 +150,13 @@ int	main(void)
 	printf("data\t\torder\t\ttarget_order\tweight\t\tabsolute_weight\t\tsecond_weight\t\n");
 	for (int i = 0; i < n; ++i)
 	{
-		printf("%d\t\t%d\t\t%d\t\t%d\t\t%d\t\t\t%d\t\n",(*(list_a + i)).data, (*(list_a + i)).order, (*(list_a + i)).target_order, (*(list_a + i)).weight, (*(list_a + i)).absolute_weight, (*(list_a + i)).second_order);
+		printf("%d\t\t%d\t\t%d\t\t%d\t\t%d\t\t\t%d\t",(*(list_a + i)).data, (*(list_a + i)).order, (*(list_a + i)).target_order, (*(list_a + i)).weight, (*(list_a + i)).absolute_weight, (*(list_a + i)).second_order);
+		printf("%d", (list_a + i)->order - (list_a + i)->target_order);
+		if ((list_a + i)->absolute_weight > n / 4)
+			printf(" \t\t\t%d ", (list_a + i)->order);
+		else
+			printf(" \t%d ", (list_a + i)->order);
+		printf("\n");
 	}
 
 	int cnt = 0;

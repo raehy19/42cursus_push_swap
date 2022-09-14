@@ -13,7 +13,7 @@
 NAME := push_swap
 BONUS_NAME := checker
 CC := cc
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -g
 RM := rm -f
 
 PUSH_SWAP_SRCS := \
