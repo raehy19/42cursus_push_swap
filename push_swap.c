@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <printf.h>
 #include "push_swap.h"
 
 void	ft_init_stack(t_stack *stack)
@@ -22,20 +23,19 @@ void	ft_push_stack_node(t_stack *stack, t_node *node)
 {
 	if (stack->size == 1)
 	{
-		(*(stack->head))->next = node;
-		(*(stack->head))->prev = node;
-		node->next = (*(stack->head));
-		node->prev = (*(stack->head));
+		stack->head->next = node;
+		stack->head->prev = node;
+		node->next = stack->head;
+		node->prev = stack->head;
 	}
 	else if (stack->size > 1)
 	{
-		(*(stack->head))->prev->next = node;
-		(*(stack->head))->next->prev = node;
-		node->prev = (*(stack->head))->prev;
-		node->next = (*(stack->head));
-		*(stack->head) = node;
+		stack->head->prev->next = node;
+		stack->head->next->prev = node;
+		node->prev = stack->head->prev;
+		node->next = stack->head;
 	}
-	*(stack->head) = node;
+	stack->head = node;
 	++(stack->size);
 }
 
@@ -58,19 +58,19 @@ t_node	*ft_pop_stack_node(t_stack *stack)
 	temp = NULL;
 	if (stack->size == 1)
 	{
-		(*(stack->head))->prev = NULL;
-		(*(stack->head))->next = NULL;
-		temp = *(stack->head);
-		(*(stack->head)) = NULL;
+		stack->head->prev = NULL;
+		stack->head->next = NULL;
+		temp = stack->head;
+		stack->head = NULL;
 	}
 	else if (stack->size > 1)
 	{
-		(*(stack->head))->prev->next = (*(stack->head))->next;
-		(*(stack->head))->next->prev = (*(stack->head))->prev;
-		(*(stack->head))->prev = NULL;
-		(*(stack->head))->next = NULL;
-		temp = *(stack->head);
-		*(stack->head) = (*(stack->head))->next;
+		stack->head->prev->next = stack->head->next;
+		stack->head->next->prev = stack->head->prev;
+		stack->head->prev = NULL;
+		stack->head->next = NULL;
+		temp = stack->head;
+		stack->head = stack->head->next;
 	}
 
 	return (temp);
@@ -78,10 +78,25 @@ t_node	*ft_pop_stack_node(t_stack *stack)
 
 int	main(int ac, char **av)
 {
+	int		i;
 	t_stack	a;
 	t_stack	b;
 
 	ft_init_stack(&a);
 	ft_init_stack(&b);
+	i = 0;
+	while (++i < ac)
+	{
+		ft_push_stack_data(&a, ft_atoi(*(av + i)));
+	}
+
+	t_node	*temp;
+	temp = a.head;
+	for (int k = 0; k < ac - 1; ++k)
+	{
+		printf("%d\n", temp->data);
+		temp = temp->next;
+	}
+	printf("\nstack size : %d", a.size);
 	return (0);
 }

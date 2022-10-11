@@ -18,6 +18,7 @@ RM := rm -f
 
 PUSH_SWAP_SRCS := \
 	push_swap.c \
+	ft_atoi.c \
 
 PUSH_SWAP_SRCS_BONUS := \
 

@@ -28,8 +28,10 @@ struct s_node
 
 typedef struct s_stack
 {
-	t_node	**head;
+	t_node	*head;
 	int		size;
 }	t_stack;
+
+int	ft_atoi(const char *str);
 
 #endif
