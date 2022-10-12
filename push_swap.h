@@ -22,6 +22,7 @@ struct s_node
 {
 	int		data;
 	int		order;
+	int		is_lis;
 	t_node	*prev;
 	t_node	*next;
 };
@@ -32,7 +33,8 @@ typedef struct s_stack
 	int		size;
 }	t_stack;
 
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
+void	*ft_calloc(int count, int size);
 
 void	ft_init_stack(t_stack *stack);
 void	ft_push_stack_node(t_stack *stack, t_node *node);
