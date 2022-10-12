@@ -41,7 +41,7 @@ void	ft_parse_data(t_stack *a, int ac, char **av)
 	}
 }
 
-typedef struct s_lis_find
+typedef struct s_lis_data
 {
 	int	order;
 	int	i_len;
@@ -65,38 +65,43 @@ void	ft_init_lis_arr(t_lis_data *arr, t_node *start, int len)
 typedef struct s_is_lis_list
 {
 	int	size;
-	int	*is_lis_list;
-}	t_is_lis_list;
+	int	*lis_orders;
+}	t_lis_orders;
 
-t_is_lis_list	ft_is_lis_list_n_size(t_lis_data *arr, int max_idx)
+t_lis_orders	ft_is_lis_list_n_size(t_lis_data *arr, int len)
 {
-	t_is_lis_list	to_return;
-	int			i;
-	int			*is_lis;
+	t_lis_orders	ret;
+	int				i;
+	int				max_idx;
 
-	to_return.size = (arr + max_idx)->i_len;
-	to_return.is_lis_list = (int *) malloc(sizeof(int) * (arr + max_idx)->i_len);
+	max_idx = 0;
+	i = 0;
+	while (++i < len)
+		if ((arr + i)->i_len > (arr + max_idx)->i_len)
+			max_idx = i;
+	ret.size = (arr + max_idx)->i_len;
+	ret.lis_orders = (int *) malloc(sizeof(int) * (arr + max_idx)->i_len);
 	i = -1;
-	while (++i < (arr + max_idx)->i_len)
+	while (++i < ret.size)
 	{
-		*(to_return.is_lis_list + i) = (arr + max_idx)->order;
+		*(ret.lis_orders + i) = (arr + max_idx)->order;
 		max_idx = (arr + max_idx)->prev_i;
 	}
 	//debug
 	printf("\n\nlis list :\n");
-	for (int k = 0; k < to_return.size; ++k)
+	for (int k = 0; k < ret.size; ++k)
 	{
-		printf("%5d", *(to_return.is_lis_list + k));
+		printf("%5d", *(ret.lis_orders + k));
 	}
 	printf("\n\n");
+	//debug
 	free(arr);
-	return (to_return);
+	return (ret);
 }
 
-t_is_lis_list	ft_is_lis_list(t_node *start, int len)
+t_lis_orders	ft_is_lis_list(t_node *start, int len)
 {
 	t_lis_data	*arr;
-	int			max_idx;
 	int			i;
 	int			j;
 
@@ -115,11 +120,11 @@ t_is_lis_list	ft_is_lis_list(t_node *start, int len)
 			{
 				(arr + i)->i_len = (arr + j)->i_len + 1;
 				(arr + i)->prev_i = j;
-				max_idx = i;
 			}
 		}
+		printf("arr + %2d     : %5d %5d %5d\n",i, (arr+i)->order,(arr+i)->i_len, (arr+i)->prev_i);
 	}
-	return (ft_is_lis_list_n_size(arr, max_idx));
+	return (ft_is_lis_list_n_size(arr, len));
 }
 
 int	ft_free_n_return(t_lis_data *to_free, int to_return)
@@ -147,13 +152,15 @@ int	ft_find_lis_len(t_node *start, int len)
 		{
 			if ((arr + j)->order < (arr + i)->order
 				&& (arr + j)->i_len >= (arr + i)->i_len)
-			{
 				(arr + i)->i_len = (arr + j)->i_len + 1;
-				max_idx = i;
-			}
 		}
 	}
-	printf("max idx : %5d ,lis len : %5d\n",max_idx ,(arr+max_idx)->i_len);
+	max_idx = 0;
+	i = 0;
+	while (++i < len)
+		if ((arr + i)->i_len > (arr + max_idx)->i_len)
+			max_idx = i;
+	printf("max idx : %5d ,lis len : %5d\n", max_idx ,(arr+max_idx)->i_len);
 	return (ft_free_n_return(arr, (arr + max_idx)->i_len));
 }
 
@@ -181,7 +188,7 @@ t_node	*ft_find_l_lis_node(t_stack *a, int *lis_len)
 	return (lis_longest_node);
 }
 
-void	ft_set_is_lis(t_stack *a, t_is_lis_list is_lis_arr)
+void	ft_set_is_lis(t_stack *a, t_lis_orders is_lis_arr)
 {
 	t_node	*temp;
 	int		i;
@@ -193,11 +200,11 @@ void	ft_set_is_lis(t_stack *a, t_is_lis_list is_lis_arr)
 	{
 		j = -1;
 		while (++j < is_lis_arr.size)
-			if (temp->order == *(is_lis_arr.is_lis_list + j))
+			if (temp->order == *(is_lis_arr.lis_orders + j))
 				temp->is_lis = 1;
 		temp = temp->next;
 	}
-	free(is_lis_arr.is_lis_list);
+	free(is_lis_arr.lis_orders);
 }
 
 void	ft_stack_find_lis(t_stack *a)
