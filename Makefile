@@ -18,19 +18,28 @@ RM := rm -f
 
 PUSH_SWAP_SRCS := \
 	push_swap.c \
+	push_swap_stack_ctl_1.c \
 	ft_atoi.c \
 
 PUSH_SWAP_SRCS_BONUS := \
+
+all : $(NAME)
+
+bonus : $(BONUS_NAME)
 
 PUSH_SWAP_OBJS := $(PUSH_SWAP_SRCS:.c=.o)
 
 PUSH_SWAP_OBJS_BONUS := $(PRINTF_SRCS_BONUS:.c=.o)
 
-all : $(NAME)
+PUSH_SWAP_DEPS := $(PUSH_SWAP_SRCS:.c=.d)
+
+PUSH_SWAP_DEPS_BONUS := $(PRINTF_SRCS_BONUS:.c=.d)
 
 clean :
 	$(RM) $(PUSH_SWAP_OBJS)
 	$(RM) $(PUSH_SWAP_OBJS_BONUS)
+	$(RM) $(PUSH_SWAP_DEPS)
+	$(RM) $(PUSH_SWAP_DEPS_BONUS)
 
 fclean : clean
 	$(RM) $(BONUS_NAME)
@@ -39,7 +48,7 @@ fclean : clean
 re : fclean
 	make all
 
-bonus : $(BONUS_NAME)
+-include $(PUSH_SWAP_DEPS) $(PUSH_SWAP_DEPS_BONUS)
 
 $(NAME) : $(PUSH_SWAP_OBJS)
 	$(CC) -o $@ $^
@@ -53,4 +62,3 @@ run : $(NAME)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY : all bonus clean fclean re
-

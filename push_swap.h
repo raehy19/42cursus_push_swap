@@ -34,4 +34,10 @@ typedef struct s_stack
 
 int	ft_atoi(const char *str);
 
+void	ft_init_stack(t_stack *stack);
+void	ft_push_stack_node(t_stack *stack, t_node *node);
+void	ft_push_stack_data(t_stack *stack, int data);
+t_node	*ft_pop_stack_node(t_stack *stack);
+void	ft_clear_stack(t_stack *stack);
+
 #endif
