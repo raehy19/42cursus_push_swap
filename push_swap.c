@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <printf.h>
 #include "push_swap.h"
 
 void	ft_parse_data(t_stack *a, int ac, char **av)
@@ -59,7 +58,7 @@ int	main(int ac, char **av)
 	temp = a.head;
 	for (int k = 0; k < ac - 1; ++k)
 	{
-		printf("%10d %10d %10d\n", temp->data, temp->order, temp->is_lis);
+		printf("%10d %10d %10d\n", temp->data, temp->order, temp->is_sort);
 		temp = temp->next;
 	}
 	printf("\nstack size : %d", a.size);

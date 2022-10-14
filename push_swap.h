@@ -13,6 +13,8 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+#include <printf.h>
+
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -22,7 +24,7 @@ struct s_node
 {
 	int		data;
 	int		order;
-	int		is_lis;
+	int		is_sort;
 	t_node	*prev;
 	t_node	*next;
 };
@@ -32,6 +34,20 @@ typedef struct s_stack
 	t_node	*head;
 	int		size;
 }	t_stack;
+
+typedef struct s_lis_data
+{
+	int	order;
+	int	i_len;
+	int	prev_i;
+}	t_lis_data;
+
+typedef struct s_lis_orders
+{
+	int	size;
+	int	*lis_orders;
+}	t_lis_orders;
+
 
 int		ft_atoi(const char *str);
 void	*ft_calloc(int count, int size);
