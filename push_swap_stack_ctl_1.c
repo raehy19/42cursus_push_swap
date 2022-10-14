@@ -30,10 +30,10 @@ void	ft_push_stack_node(t_stack *stack, t_node *node)
 	}
 	else if (stack->size > 1)
 	{
-		stack->head->prev->next = node;
-		stack->head->next->prev = node;
 		node->prev = stack->head->prev;
 		node->next = stack->head;
+		stack->head->prev->next = node;
+		stack->head->prev = node;
 	}
 	stack->head = node;
 	++(stack->size);
@@ -50,30 +50,34 @@ void	ft_push_stack_data(t_stack *stack, int data)
 	node->prev = NULL;
 	node->next = NULL;
 	ft_push_stack_node(stack, node);
+	if (stack->size > 1)
+		stack->head = stack->head->next;
 }
 
 t_node	*ft_pop_stack_node(t_stack *stack)
 {
-	t_node	*temp;
+	t_node	*ret;
 
-	temp = NULL;
-	if (stack->size == 1)
+	if (stack->size < 1)
+		return (NULL);
+	else if (stack->size == 1)
 	{
 		stack->head->prev = NULL;
 		stack->head->next = NULL;
-		temp = stack->head;
+		ret = stack->head;
 		stack->head = NULL;
 	}
-	else if (stack->size > 1)
+	else
 	{
 		stack->head->prev->next = stack->head->next;
 		stack->head->next->prev = stack->head->prev;
-		stack->head->prev = NULL;
-		stack->head->next = NULL;
-		temp = stack->head;
+		ret = stack->head;
 		stack->head = stack->head->next;
+		ret->prev = NULL;
+		ret->next = NULL;
 	}
-	return (temp);
+	--(stack->size);
+	return (ret);
 }
 
 void	ft_clear_stack(t_stack *stack)

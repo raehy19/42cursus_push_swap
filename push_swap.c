@@ -55,16 +55,52 @@ int	main(int ac, char **av)
 	ft_init_stack(&b, 'b');
 	ft_parse_data(&a, ac, av);
 	ft_stack_find_lis(&a);
-	// debug
-	t_node	*temp;
-	temp = a.head;
+
+
+//	// debug
+//	t_node	*temp;
+//	temp = a.head;
+//	for (int k = 0; k < a.size; ++k)
+//	{
+//		printf("%10d %10d %10d\n", temp->data, temp->order, temp->is_sort);
+//		temp = temp->next;
+//	}
+//	printf("\nstack size : %d", a.size);
+//
+//
+
+
+	// test
 	for (int k = 0; k < ac - 1; ++k)
 	{
-		printf("%10d %10d %10d\n", temp->data, temp->order, temp->is_sort);
-		temp = temp->next;
+		if (a.head->is_sort == 0)
+			ft_push(&a, &b);
+		else
+			ft_rotate(&a);
 	}
-	printf("\nstack size : %d", a.size);
 
-	printf("\nstderr : %d", STDERR_FILENO);
+
+//
+//	// debug
+//	//print a
+//	printf("stack %c\n", a.stack_name);
+//	temp = a.head;
+//	for (int k = 0; k < a.size; ++k)
+//	{
+//		printf("%10d %10d %10d\n", temp->data, temp->order, temp->is_sort);
+//		temp = temp->next;
+//	}
+//	printf("\na stack size : %d\n\n", a.size);
+//
+//
+//	//print b
+//	printf("stack %c\n", b.stack_name);
+//	temp = b.head;
+//	for (int k = 0; k < b.size; ++k)
+//	{
+//		printf("%10d %10d %10d\n", temp->data, temp->order, temp->is_sort);
+//		temp = temp->next;
+//	}
+//	printf("\nb stack size : %d\n\n", b.size);
 	return (0);
 }
