@@ -12,10 +12,11 @@
 
 #include "push_swap.h"
 
-void	ft_init_stack(t_stack *stack)
+void	ft_init_stack(t_stack *stack, char stack_name)
 {
 	stack->head = NULL;
 	stack->size = 0;
+	stack->stack_name = stack_name;
 }
 
 void	ft_push_stack_node(t_stack *stack, t_node *node)

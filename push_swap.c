@@ -51,8 +51,8 @@ int	main(int ac, char **av)
 	t_stack	a;
 	t_stack	b;
 
-	ft_init_stack(&a);
-	ft_init_stack(&b);
+	ft_init_stack(&a, 'a');
+	ft_init_stack(&b, 'b');
 	ft_parse_data(&a, ac, av);
 	ft_stack_find_lis(&a);
 	// debug

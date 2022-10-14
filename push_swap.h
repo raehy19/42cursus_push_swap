@@ -34,6 +34,7 @@ typedef struct s_stack
 {
 	t_node	*head;
 	int		size;
+	char	stack_name;
 }	t_stack;
 
 typedef struct s_lis_data
@@ -53,11 +54,21 @@ void	ft_error(int error_code);
 
 int		ft_atoi(const char *str);
 
-void	ft_init_stack(t_stack *stack);
+void	ft_init_stack(t_stack *stack, char stack_name);
 void	ft_push_stack_node(t_stack *stack, t_node *node);
 void	ft_push_stack_data(t_stack *stack, int data);
 t_node	*ft_pop_stack_node(t_stack *stack);
 void	ft_clear_stack(t_stack *stack);
+
+
+void	ft_rotate(t_stack *stack);
+void	ft_reverse_rotate(t_stack *stack);
+void	ft_push(t_stack *to_pop, t_stack *to_push);
+void	ft_reverse_rotate_rotate(t_stack *stack1, t_stack *stack2);
+void	ft_rotate_rotate(t_stack *stack1, t_stack *stack2);
+void	ft_swap_swap(t_stack *stack1, t_stack *stack2);
+void	ft_swap(t_stack *stack);
+
 
 void	ft_stack_find_lis(t_stack *a);
 
