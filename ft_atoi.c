@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <limits.h>
+#include "push_swap.h"
 
 int	ft_isdigit(int c)
 {
@@ -54,15 +53,15 @@ int	ft_atoi(const char *str)
 	sign = ft_cal_sign(str, &i);
 	result = 0;
 	if (!ft_isdigit(*(str + i)))
-		exit (3);
+		ft_error(4);
 	while (ft_isdigit(*(str + i)))
 	{
 		result = result * 10 + (unsigned long long)(*(str + i) - '0');
 		if (result > INT_MAX)
-			exit(4);
+			ft_error(5);
 		++i;
 	}
 	if (*(str + i) != '\0')
-		exit (5);
+		ft_error(6);
 	return ((int)(result * sign));
 }

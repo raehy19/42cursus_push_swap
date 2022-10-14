@@ -12,6 +12,12 @@
 
 #include "push_swap.h"
 
+void	ft_error(int error_code)
+{
+	write(STDERR_FILENO, "Error\n", 6);
+	exit(error_code);
+}
+
 void	ft_parse_data(t_stack *a, int ac, char **av)
 {
 	int		i;
@@ -31,7 +37,7 @@ void	ft_parse_data(t_stack *a, int ac, char **av)
 		while (++j < a->size - 1)
 		{
 			if (temp->data == current->data)
-				exit(6);
+				ft_error(7);
 			if (temp->data < current->data)
 				++(current->order);
 			temp = temp->next;
@@ -58,5 +64,7 @@ int	main(int ac, char **av)
 		temp = temp->next;
 	}
 	printf("\nstack size : %d", a.size);
+
+	printf("\nstderr : %d", STDERR_FILENO);
 	return (0);
 }

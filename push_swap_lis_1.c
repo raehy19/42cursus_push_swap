@@ -67,7 +67,7 @@ void	ft_stack_find_lis(t_stack *a)
 	temp = a->head;
 	lis_len = (int *) malloc(sizeof(int) * a->size);
 	if (!lis_len)
-		exit(7);
+		ft_error(3);
 	i = -1;
 	while (++i < a->size)
 	{

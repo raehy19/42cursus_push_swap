@@ -17,6 +17,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 
 typedef struct s_node	t_node;
 
@@ -48,8 +49,9 @@ typedef struct s_lis_orders
 	int	*lis_orders;
 }	t_lis_orders;
 
+void	ft_error(int error_code);
+
 int		ft_atoi(const char *str);
-void	*ft_calloc(int count, int size);
 
 void	ft_init_stack(t_stack *stack);
 void	ft_push_stack_node(t_stack *stack, t_node *node);

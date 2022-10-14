@@ -57,7 +57,7 @@ t_lis_orders	ft_find_lis_list(t_node *start, int len)
 
 	arr = (t_lis_data *) malloc(sizeof(t_lis_data) * len);
 	if (!arr)
-		exit(7);
+		ft_error(3);
 	ft_init_lis_arr(arr, start, len);
 	i = 0;
 	while (++i < len)
@@ -100,7 +100,7 @@ int	ft_find_lis_len(t_node *start, int len)
 
 	arr = (t_lis_data *) malloc(sizeof(t_lis_data) * len);
 	if (!arr)
-		exit(7);
+		ft_error(3);
 	ft_init_lis_arr(arr, start, len);
 	i = 0;
 	while (++i < len)
