@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_stack_ctl_1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjeong <rjeong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:17:40 by rjeong            #+#    #+#             */
 /*   Updated: 2022/10/12 09:17:41 by rjeong           ###   ########.fr       */

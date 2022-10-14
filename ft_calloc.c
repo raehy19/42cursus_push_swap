@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjeong <rjeong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:35:14 by rjeong            #+#    #+#             */
 /*   Updated: 2022/10/12 11:35:41 by rjeong           ###   ########.fr       */

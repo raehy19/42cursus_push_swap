@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rjeong <rjeong@student.42.fr>              +#+  +:+       +#+         #
+#    By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:12:29 by rjeong            #+#    #+#              #
 #    Updated: 2022/09/06 15:12:32 by rjeong           ###   ########.fr        #
@@ -18,6 +18,8 @@ RM := rm -f
 
 PUSH_SWAP_SRCS := \
 	push_swap.c \
+	push_swap_lis_1.c \
+	push_swap_lis_2.c \
 	push_swap_stack_ctl_1.c \
 	ft_atoi.c \
 
