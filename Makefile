@@ -20,7 +20,7 @@ PUSH_SWAP_SRCS := \
 	push_swap.c \
 	push_swap_lis_1.c \
 	push_swap_lis_2.c \
-	push_swap_stack_ctl_1.c \
+	push_swap_stack_ctl.c \
 	push_swap_operations_1.c \
 	push_swap_operations_2.c \
 	ft_atoi.c \

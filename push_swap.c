@@ -70,6 +70,13 @@ int	main(int ac, char **av)
 //
 
 
+	// b 정렬 확인 :
+	// 1. order가 b에서 가장 길다면 head < order && tail < order
+	// 2. 아닐 경우 head < order && tail > order 일때 삽입
+	// 위
+	//
+
+
 	// test
 	for (int k = 0; k < ac - 1; ++k)
 	{
