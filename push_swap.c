@@ -40,7 +40,6 @@ void	ft_parse_data(t_stack *a, int ac, char **av)
 	}
 }
 
-
 int	main(int ac, char **av)
 {
 	t_stack	a;
@@ -48,11 +47,8 @@ int	main(int ac, char **av)
 
 	ft_init_stack(&a);
 	ft_init_stack(&b);
-
 	ft_parse_data(&a, ac, av);
-
 	ft_stack_find_lis(&a);
-
 	// debug
 	t_node	*temp;
 	temp = a.head;

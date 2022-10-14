@@ -13,7 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include <printf.h>
+# include <printf.h>
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -47,7 +47,6 @@ typedef struct s_lis_orders
 	int	size;
 	int	*lis_orders;
 }	t_lis_orders;
-
 
 int		ft_atoi(const char *str);
 void	*ft_calloc(int count, int size);

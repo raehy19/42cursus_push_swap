@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include <printf.h>
 #include "push_swap.h"
-
 
 void	ft_init_lis_arr(t_lis_data *arr, t_node *start, int len)
 {
@@ -48,14 +45,6 @@ t_lis_orders	ft_lis_list_ret(t_lis_data *arr, int len)
 		*(ret.lis_orders + i) = (arr + max_idx)->order;
 		max_idx = (arr + max_idx)->prev_i;
 	}
-	//debug
-	printf("\n\nlis list :\n");
-	for (int k = 0; k < ret.size; ++k)
-	{
-		printf("%5d", *(ret.lis_orders + k));
-	}
-	printf("\n\nlis size : %d\n\n", ret.size);
-	//debug
 	free(arr);
 	return (ret);
 }
@@ -83,7 +72,6 @@ t_lis_orders	ft_find_lis_list(t_node *start, int len)
 				(arr + i)->prev_i = j;
 			}
 		}
-//		printf("arr + %2d    : %5d %5d %5d\n",i, (arr+i)->order,(arr+i)->i_len, (arr+i)->prev_i);
 	}
 	return (ft_lis_list_ret(arr, len));
 }
@@ -100,7 +88,6 @@ int	ft_lis_len_ret(t_lis_data *arr, int len)
 		if ((arr + i)->i_len > (arr + max_idx)->i_len)
 			max_idx = i;
 	ret = (arr + max_idx)->i_len;
-	printf("max idx : %5d,  lis len : %5d\n", max_idx ,(arr+max_idx)->i_len);
 	free(arr);
 	return (ret);
 }

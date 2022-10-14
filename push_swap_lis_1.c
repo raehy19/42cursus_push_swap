@@ -13,7 +13,7 @@
 #include "push_swap.h"
 
 t_lis_orders	ft_find_lis_list(t_node *start, int len);
-int	ft_find_lis_len(t_node *start, int len);
+int				ft_find_lis_len(t_node *start, int len);
 
 t_node	*ft_max_lis_node(t_stack *a, int *lis_len)
 {
