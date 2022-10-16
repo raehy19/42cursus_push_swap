@@ -49,19 +49,42 @@ void	ft_parse_data(t_stack *a, int ac, char **av)
 int	ft_count_unsorted(t_stack *stack)
 {
 	t_node	*temp;
-	int		count;
+	int		cnt;
 	int		i;
 
-	count = 0;
+	cnt = 0;
 	temp = stack->head;
 	i = -1;
 	while (++i < stack->size)
 	{
 		if (temp->is_sort == 0)
-			++count;
+			++cnt;
 		temp = temp->next;
 	}
-	return (count);
+	return (cnt);
+}
+
+void	ft_final_sort(t_stack *stack)
+{
+	t_node	*temp;
+	int		cnt;
+	int		i;
+
+	temp = stack->head;
+	cnt = 0;
+	i = -1;
+	while (temp->order != 0)
+	{
+		temp = temp->next;
+		++cnt;
+	}
+	printf("\ncnt : %d\n",cnt);
+	if (cnt > stack->size / 2)
+		while (++i < stack->size - cnt)
+			ft_reverse_rotate(stack);
+	else
+		while (++i < cnt)
+			ft_rotate(stack);
 }
 
 int	main(int ac, char **av)
@@ -86,13 +109,9 @@ int	main(int ac, char **av)
 	printf("\nstack size : %d", a.size);
 
 
-
 	// b 정렬 확인 :
 	// 1. order가 b에서 가장 길다면 head < order && tail < order
 	// 2. 아닐 경우 head < order && tail > order 일때 삽입
-	// 위
-	//
-
 
 	// test : push unsorted to b & swap if can
 	while (ft_count_unsorted(&a) > 0)
@@ -117,10 +136,11 @@ int	main(int ac, char **av)
 				ft_rotate(&a);
 		}
 	}
+	printf("\nunsorted : %d\n", ft_count_unsorted(&a));
+	if (ft_count_unsorted(&a) == 0)
+		ft_final_sort(&a);
 
-
-
-	// debug
+//	// debug
 	//print a
 	printf("stack %c\n", a.stack_name);
 	temp = a.head;
