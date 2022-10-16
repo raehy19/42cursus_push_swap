@@ -26,6 +26,7 @@ struct s_node
 	int		data;
 	int		order;
 	int		is_sort;
+	int		weight;
 	t_node	*prev;
 	t_node	*next;
 };

@@ -33,9 +33,9 @@ void	ft_swap(t_stack *stack)
 	t_node	*temp;
 
 	temp = ft_pop_stack_node(stack);
-	ft_rotate(stack);
+	stack->head = stack->head->next;
 	ft_push_stack_node(stack, temp);
-	ft_reverse_rotate(stack);
+	stack->head = stack->head->prev;
 	write(STDOUT_FILENO, "s", 1);
 	write(STDOUT_FILENO, &(stack->stack_name), 1);
 	write(STDOUT_FILENO, "\n", 1);
