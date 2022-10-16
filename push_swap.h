@@ -26,7 +26,6 @@ struct s_node
 	int		data;
 	int		order;
 	int		is_sort;
-	int		weight;
 	t_node	*prev;
 	t_node	*next;
 };
@@ -50,6 +49,19 @@ typedef struct s_lis_orders
 	int	size;
 	int	*lis_orders;
 }	t_lis_orders;
+
+typedef struct s_commands
+{
+	int		ra;
+	int		rra;
+	int		rb;
+	int		rrb;
+	int		rr;
+	int		rrr;
+	t_stack	*to_pop;
+	t_stack	*to_push;
+	int		cmd_cnt;
+}	t_commands;
 
 void	ft_error(int error_code);
 

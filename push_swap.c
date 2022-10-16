@@ -87,16 +87,45 @@ void	ft_final_sort(t_stack *stack)
 			ft_rotate(stack);
 }
 
+void	ft_init_commands(t_commands *commands, int size)
+{
+	int	i;
+
+	commands = (t_commands *)	malloc(sizeof(t_commands) * (size));
+	if (!commands)
+		ft_error(3);
+	i = -1;
+	while (++i < size)
+	{
+		(commands + i)->ra = 0;
+		(commands + i)->rra = 0;
+		(commands + i)->rb = 0;
+		(commands + i)->rrb = 0;
+		(commands + i)->rr = 0;
+		(commands + i)->rrr = 0;
+		(commands + i)->to_pop =  NULL;
+		(commands + i)->to_push =  NULL;
+		(commands + i)->cmd_cnt = 0;
+	}
+}
+
+void	ft_find_appropriate(int order, t_stack *to_pop, t_stack *to_push, t_commands *commands)
+{
+
+}
+
 int	main(int ac, char **av)
 {
-	t_stack	a;
-	t_stack	b;
+	t_stack		a;
+	t_stack		b;
+	t_commands	*commands;
 
 	ft_init_stack(&a, 'a');
 	ft_init_stack(&b, 'b');
 	ft_parse_data(&a, ac, av);
 	ft_stack_find_lis(&a);
 
+	ft_init_commands(commands, a.size + b.size);
 
 	// debug
 	t_node	*temp;
@@ -120,7 +149,8 @@ int	main(int ac, char **av)
 			ft_push(&a, &b);
 		else
 		{
-			if ((a.head->prev->is_sort == 1
+			if (a.head->is_sort == 1
+				&& (a.head->prev->is_sort == 1
 				&& a.head->next->is_sort == 0
 				&& a.head->next->order < a.head->order
 				&& a.head->next->order > a.head->prev->order)
@@ -136,6 +166,8 @@ int	main(int ac, char **av)
 				ft_rotate(&a);
 		}
 	}
+
+
 	printf("\nunsorted : %d\n", ft_count_unsorted(&a));
 	if (ft_count_unsorted(&a) == 0)
 		ft_final_sort(&a);
