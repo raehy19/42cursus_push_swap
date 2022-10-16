@@ -50,7 +50,7 @@ typedef struct s_lis_orders
 	int	*lis_orders;
 }	t_lis_orders;
 
-typedef struct s_commands
+typedef struct s_cmds
 {
 	int		ra;
 	int		rra;
@@ -61,7 +61,7 @@ typedef struct s_commands
 	t_stack	*to_pop;
 	t_stack	*to_push;
 	int		cmd_cnt;
-}	t_commands;
+}	t_cmds;
 
 void	ft_error(int error_code);
 

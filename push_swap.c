@@ -87,45 +87,103 @@ void	ft_final_sort(t_stack *stack)
 			ft_rotate(stack);
 }
 
-void	ft_init_commands(t_commands *commands, int size)
+void	ft_init_cmds(t_cmds **cmds, int size)
 {
 	int	i;
 
-	commands = (t_commands *)	malloc(sizeof(t_commands) * (size));
-	if (!commands)
+	*cmds = (t_cmds *) malloc(sizeof(t_cmds) * (size));
+	if (!(*cmds))
 		ft_error(3);
 	i = -1;
 	while (++i < size)
 	{
-		(commands + i)->ra = 0;
-		(commands + i)->rra = 0;
-		(commands + i)->rb = 0;
-		(commands + i)->rrb = 0;
-		(commands + i)->rr = 0;
-		(commands + i)->rrr = 0;
-		(commands + i)->to_pop =  NULL;
-		(commands + i)->to_push =  NULL;
-		(commands + i)->cmd_cnt = 0;
+		((*cmds) + i)->ra = 0;
+		((*cmds) + i)->rra = 0;
+		((*cmds) + i)->rb = 0;
+		((*cmds) + i)->rrb = 0;
+		((*cmds) + i)->rr = 0;
+		((*cmds) + i)->rrr = 0;
+		((*cmds) + i)->to_pop =  NULL;
+		((*cmds) + i)->to_push =  NULL;
+		((*cmds) + i)->cmd_cnt = 0;
 	}
 }
 
-void	ft_find_appropriate(int order, t_stack *to_pop, t_stack *to_push, t_commands *commands)
+void	ft_is_swappable(t_stack *a)
 {
+	if ((a->head->is_sort == 1 && a->head->next->is_sort == 0)
+		&& ((a->head->prev->is_sort == 1
+			 && a->head->next->order < a->head->order
+			 && a->head->next->order > a->head->prev->order)
+			|| (a->head->order > 0
+				&& a->head->order - 1 == a->head->next->order)
+			|| (a->head->order == 0
+				&& a->head->next->order == a->size - 1)))
+	{
+		ft_swap(&a);
+		a->head->is_sort = 1;
+	}
+}
 
+void	ft_cal_r_to_pop(t_stack *stack, int i, t_cmds *cmds)
+{
+	if (stack->stack_name == 'a')
+	{
+		if (i > stack->size / 2)
+			cmds->rra = stack->size - i;
+		else
+			cmds->ra = i;
+	}
+	else if (stack->stack_name == 'b')
+	{
+		if (i > stack->size / 2)
+			cmds->rrb = stack->size - i;
+		else
+			cmds->rb = i;
+	}
+}
+
+void	ft_cal_cmds(t_stack *a, t_stack *b, t_cmds *cmds)
+{
+	int		i;
+	t_node	*temp;
+
+	i = -1;
+	temp = a->head;
+	while (++i < a->size)
+	{
+		if (temp->is_sort == 0)
+		{
+			ft_cal_r_to_pop(a, i, cmds + i);
+			// cal r to push
+			// cal rr or rrr and cmd cnt
+		}
+		temp = temp->next;
+	}
+	temp = b->head;
+	while (++i < a->size + b->size)
+	{
+		if (temp->is_sort == 0)
+		{
+			ft_cal_r_to_pop(b, i, cmds + i);
+			// cal r to push
+			// cal rr or rrr and cmd cnt
+		}
+		temp = temp->next;
+	}
 }
 
 int	main(int ac, char **av)
 {
-	t_stack		a;
-	t_stack		b;
-	t_commands	*commands;
+	t_stack	a;
+	t_stack	b;
+	t_cmds	*cmds;
 
 	ft_init_stack(&a, 'a');
 	ft_init_stack(&b, 'b');
 	ft_parse_data(&a, ac, av);
 	ft_stack_find_lis(&a);
 
-	ft_init_commands(commands, a.size + b.size);
 
 	// debug
 	t_node	*temp;
@@ -143,34 +201,21 @@ int	main(int ac, char **av)
 	// 2. 아닐 경우 head < order && tail > order 일때 삽입
 
 	// test : push unsorted to b & swap if can
-	while (ft_count_unsorted(&a) > 0)
+	while (ft_count_unsorted(&a) + ft_count_unsorted(&b) > 0)
 	{
-		if (a.head->is_sort == 0)
-			ft_push(&a, &b);
-		else
-		{
-			if (a.head->is_sort == 1
-				&& (a.head->prev->is_sort == 1
-				&& a.head->next->is_sort == 0
-				&& a.head->next->order < a.head->order
-				&& a.head->next->order > a.head->prev->order)
-				|| (a.head->order > 0
-				&& a.head->order - 1 == a.head->next->order)
-				|| (a.head->order == 0
-				&& a.head->next->order == a.size - 1))
-			{
-				ft_swap(&a);
-				a.head->is_sort = 1;
-			}
-			else
-				ft_rotate(&a);
-		}
+		ft_is_swappable(&a);
+		ft_init_cmds(&cmds, a.size + b.size); // == ac - 1 ?
+		free(cmds);
 	}
 
 
-	printf("\nunsorted : %d\n", ft_count_unsorted(&a));
-	if (ft_count_unsorted(&a) == 0)
-		ft_final_sort(&a);
+//	printf("\nunsorted : %d\n", ft_count_unsorted(&a));
+//	if (ft_count_unsorted(&a) == 0)
+//		ft_final_sort(&a);
+
+
+	ft_final_sort(&a);
+
 
 //	// debug
 	//print a
