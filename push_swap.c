@@ -103,8 +103,8 @@ void	ft_init_cmds(t_cmds **cmds, int size)
 		((*cmds) + i)->rrb = 0;
 		((*cmds) + i)->rr = 0;
 		((*cmds) + i)->rrr = 0;
-		((*cmds) + i)->to_pop =  NULL;
-		((*cmds) + i)->to_push =  NULL;
+		((*cmds) + i)->to_pop = NULL;
+		((*cmds) + i)->to_push = NULL;
 		((*cmds) + i)->cmd_cnt = 0;
 	}
 }
@@ -125,25 +125,43 @@ void	ft_is_swappable(t_stack *a)
 	}
 }
 
-void	ft_cal_r_to_pop(t_stack *stack, int i, t_cmds *cmds)
+void	ft_cal_r_to_pop(t_stack *to_pop, int i, t_cmds *cmds)
 {
-	if (stack->stack_name == 'a')
+	if (to_pop->stack_name == 'a')
 	{
-		if (i > stack->size / 2)
-			cmds->rra = stack->size - i;
+		if (i > to_pop->size / 2)
+			cmds->rra = to_pop->size - i;
 		else
 			cmds->ra = i;
 	}
-	else if (stack->stack_name == 'b')
+	else if (to_pop->stack_name == 'b')
 	{
-		if (i > stack->size / 2)
-			cmds->rrb = stack->size - i;
+		if (i > to_pop->size / 2)
+			cmds->rrb = to_pop->size - i;
 		else
 			cmds->rb = i;
 	}
 }
 
-void	ft_cal_cmds(t_stack *a, t_stack *b, t_cmds *cmds)
+void	ft_cal_r_to_push(int order, t_stack *to_push, t_cmds *cmds)
+{
+	t_node	*temp;
+
+	temp = to_push->head;
+
+}
+
+void	ft_cal_cmd_cnt(t_cmds *cmds)
+{
+
+}
+
+void	ft_cal_r(t_stack *to_pop, t_stack *to_push, t_cmds *cmds, int i)
+{
+	ft_cal_r_to_pop(to_pop, i, cmds);
+}
+
+void	ft_cal_cmds_a(t_stack *a, t_stack *b, t_cmds *cmds)
 {
 	int		i;
 	t_node	*temp;
@@ -155,23 +173,32 @@ void	ft_cal_cmds(t_stack *a, t_stack *b, t_cmds *cmds)
 		if (temp->is_sort == 0)
 		{
 			ft_cal_r_to_pop(a, i, cmds + i);
-			// cal r to push
-			// cal rr or rrr and cmd cnt
-		}
-		temp = temp->next;
-	}
-	temp = b->head;
-	while (++i < a->size + b->size)
-	{
-		if (temp->is_sort == 0)
-		{
-			ft_cal_r_to_pop(b, i, cmds + i);
-			// cal r to push
-			// cal rr or rrr and cmd cnt
+			ft_cal_r_to_push(temp->order, b, cmds + i);
+			ft_cal_cmd_cnt(cmds + i);
 		}
 		temp = temp->next;
 	}
 }
+
+void	ft_cal_cmds_b(t_stack *a, t_stack *b, t_cmds *cmds)
+{
+	int		i;
+	t_node	*temp;
+
+	i = -1;
+	temp = b->head;
+	while (++i < b->size)
+	{
+		if (temp->is_sort == 0)
+		{
+			ft_cal_r_to_pop(b, i - a->size, cmds + i);
+			ft_cal_r_to_push(temp->order, a, cmds + i);
+			ft_cal_cmd_cnt(cmds + i);
+		}
+		temp = temp->next;
+	}
+}
+
 
 int	main(int ac, char **av)
 {
