@@ -13,17 +13,22 @@
 NAME := push_swap
 BONUS_NAME := checker
 CC := cc
-CFLAGS := -g # -Wall -Wextra -Werror
+CFLAGS := -g  -Wall -Wextra -Werror
 RM := rm -f
 
 PUSH_SWAP_SRCS := \
 	push_swap.c \
+	push_swap_ft_atoi.c \
 	push_swap_lis_1.c \
 	push_swap_lis_2.c \
 	push_swap_stack_ctl.c \
 	push_swap_operations_1.c \
 	push_swap_operations_2.c \
-	ft_atoi.c \
+	push_swap_ft_is_swappable.c \
+	push_swap_cal_cmd_cnt.c \
+	push_swap_cal_cmds.c \
+	push_swap_cal_r_cnt.c \
+
 
 PUSH_SWAP_SRCS_BONUS := \
 

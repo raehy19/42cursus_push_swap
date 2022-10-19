@@ -109,150 +109,6 @@ void	ft_init_cmds(t_cmds **cmds, int size)
 	}
 }
 
-void	ft_is_swappable(t_stack *a)
-{
-	if ((a->head->is_sort == 1 && a->head->next->is_sort == 0)
-		&& ((a->head->prev->is_sort == 1
-			 && a->head->next->order < a->head->order
-			 && a->head->next->order > a->head->prev->order)
-			|| (a->head->order > 0
-				&& a->head->order - 1 == a->head->next->order)
-			|| (a->head->order == 0
-				&& a->head->next->order == a->size - 1)))
-	{
-		ft_swap(&a);
-		a->head->is_sort = 1;
-	}
-}
-
-void	ft_cal_r_to_pop(t_stack *to_pop, int i, t_cmds *cmds)
-{
-	if (to_pop->stack_name == 'a')
-		cmds->ra = i;
-	else if (to_pop->stack_name == 'b')
-		cmds->rb = i;
-}
-
-int	ft_is_order_max(int order, t_stack *stack)
-{
-	t_node	*temp;
-	int		i;
-
-	i = -1;
-	temp = stack->head;
-	while (++i < stack->size)
-	{
-		if (temp->order > order)
-			return (0);
-		temp = temp->next;
-	}
-	return (1);
-}
-
-void	ft_cal_r_push_b(int order, t_stack *b, t_cmds *cmds)
-{
-	t_node	*temp;
-	int		i;
-
-	temp = b->head;
-	i = -1;
-	if (ft_is_order_max(order, b) == 1)
-	{
-		while (++i < b->size)
-		{
-			if (temp->prev->order < order && temp->order < order)
-				break;
-			temp = temp->next;
-		}
-	}
-	else
-	{
-		while (++i < b->size)
-		{
-			if (temp->prev->order > order && temp->order < order)
-				break;
-			temp = temp->next;
-		}
-	}
-	cmds->rb = i;
-}
-
-void	ft_cal_r_push_a(int order, t_stack *a, t_cmds *cmds)
-{
-	t_node	*temp;
-	int		i;
-
-	temp = a->head;
-	i = -1;
-	while (++i < a->size)
-	{
-		if (temp->prev->is_sort == 1 && temp->prev->order > order)
-			break;
-		temp = temp->next;
-	}
-	cmds->rra = a->size - i;
-	temp = a->head;
-	i = -1;
-	while (++i < a->size)
-	{
-		if (temp->is_sort == 1 && temp->order < order)
-			break;
-		temp = temp->prev;
-	}
-	cmds->ra = a->size - i + 1;
-}
-
-void	ft_cal_cmd_cnt_a(t_cmds *cmds)
-{
-
-}
-
-
-void	ft_cal_cmd_cnt_b(t_cmds *cmds)
-{
-
-}
-
-
-void	ft_cal_cmds_a(t_stack *a, t_stack *b, t_cmds *cmds)
-{
-	int		i;
-	t_node	*temp;
-
-	i = -1;
-	temp = a->head;
-	while (++i < a->size)
-	{
-		if (temp->is_sort == 0)
-		{
-			ft_cal_r_to_pop(a, i, cmds + i);
-			if (b->size > 2)
-				ft_cal_r_push_b(temp->order, b, cmds + i);
-			ft_cal_cmd_cnt_a(cmds + i);
-		}
-		else
-			(cmds + i)->cmd_cnt = -1;
-		temp = temp->next;
-	}
-}
-
-void	ft_cal_cmds_b(t_stack *a, t_stack *b, t_cmds *cmds)
-{
-	int		i;
-	t_node	*temp;
-
-	i = -1;
-	temp = b->head;
-	while (++i < b->size)
-	{
-		ft_cal_r_to_pop(b, i, cmds + i);
-		ft_cal_r_push_a(temp->order, a, cmds + i);
-		ft_cal_cmd_cnt_b(cmds + i);
-		temp = temp->next;
-	}
-}
-
-
 int	main(int ac, char **av)
 {
 	t_stack	a;
@@ -273,7 +129,7 @@ int	main(int ac, char **av)
 		printf("%10d %10d %10d\n", temp->data, temp->order, temp->is_sort);
 		temp = temp->next;
 	}
-	printf("\nstack size : %d", a.size);
+	printf("\nstack size : %d\n", a.size);
 
 
 	// b 정렬 확인 :
@@ -285,8 +141,17 @@ int	main(int ac, char **av)
 	{
 		ft_is_swappable(&a);
 		ft_init_cmds(&cmds, a.size + b.size); // == ac - 1 ?
-		ft_cal_cmds_a(&a, &b, cmds);
-		ft_cal_cmds_b(&a, &b, cmds + a.size);
+		ft_cal_cmds(&a, &b, cmds);
+
+		// debug start
+		for (int k = 0; k < a.size + b.size; ++k)
+		{
+			printf("%5d %5d %5d %5d %5d %5d cnt: %5d\n",cmds[k].ra, cmds[k].rra,cmds[k].rb,cmds[k].rrb,cmds[k].rr,cmds[k].rrr,cmds[k].cmd_cnt);
+		}
+		break;
+		// debug end
+
+
 		// check shortest cmd
 		free(cmds);
 	}
