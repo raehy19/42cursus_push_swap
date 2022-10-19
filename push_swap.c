@@ -143,12 +143,47 @@ void	ft_cal_r_to_pop(t_stack *to_pop, int i, t_cmds *cmds)
 	}
 }
 
+int	ft_is_order_max(int order, t_stack *stack)
+{
+	t_node	*temp;
+	int		i;
+
+	i = -1;
+	temp = stack->head;
+	while (++i < stack->size)
+	{
+		if (temp->order > order)
+			return (0);
+		temp = temp->next;
+	}
+	return (1);
+}
+
 void	ft_cal_r_to_push(int order, t_stack *to_push, t_cmds *cmds)
 {
 	t_node	*temp;
+	int		i;
 
+	i = -1;
 	temp = to_push->head;
-
+	if (ft_is_order_max(order, to_push) == 1)
+	{
+		while (++i < to_push->size)
+		{
+			if (temp->order < order && temp->next->order < order)
+				break;
+			temp = temp->next;
+		}
+	}
+	else
+	{
+		while (++i < to_push->size)
+		{
+			if (temp->order > order && temp->next->order < order)
+				break;
+			temp = temp->next;
+		}
+	}
 }
 
 void	ft_cal_cmd_cnt(t_cmds *cmds)
@@ -156,10 +191,6 @@ void	ft_cal_cmd_cnt(t_cmds *cmds)
 
 }
 
-void	ft_cal_r(t_stack *to_pop, t_stack *to_push, t_cmds *cmds, int i)
-{
-	ft_cal_r_to_pop(to_pop, i, cmds);
-}
 
 void	ft_cal_cmds_a(t_stack *a, t_stack *b, t_cmds *cmds)
 {
@@ -173,7 +204,8 @@ void	ft_cal_cmds_a(t_stack *a, t_stack *b, t_cmds *cmds)
 		if (temp->is_sort == 0)
 		{
 			ft_cal_r_to_pop(a, i, cmds + i);
-			ft_cal_r_to_push(temp->order, b, cmds + i);
+			if (b->size > 2)
+				ft_cal_r_to_push(temp->order, b, cmds + i);
 			ft_cal_cmd_cnt(cmds + i);
 		}
 		temp = temp->next;
@@ -191,7 +223,7 @@ void	ft_cal_cmds_b(t_stack *a, t_stack *b, t_cmds *cmds)
 	{
 		if (temp->is_sort == 0)
 		{
-			ft_cal_r_to_pop(b, i - a->size, cmds + i);
+			ft_cal_r_to_pop(b, i, cmds + i);
 			ft_cal_r_to_push(temp->order, a, cmds + i);
 			ft_cal_cmd_cnt(cmds + i);
 		}
@@ -232,6 +264,8 @@ int	main(int ac, char **av)
 	{
 		ft_is_swappable(&a);
 		ft_init_cmds(&cmds, a.size + b.size); // == ac - 1 ?
+		ft_cal_cmds_a(&a, &b, cmds);
+		ft_cal_cmds_b(&a, &b, cmds + a.size);
 		free(cmds);
 	}
 
