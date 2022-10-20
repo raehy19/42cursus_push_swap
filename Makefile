@@ -28,6 +28,8 @@ PUSH_SWAP_SRCS := \
 	push_swap_cal_cmd_cnt.c \
 	push_swap_cal_cmds.c \
 	push_swap_cal_r_cnt.c \
+	push_swap_execute_functions.c \
+
 
 
 PUSH_SWAP_SRCS_BONUS := \

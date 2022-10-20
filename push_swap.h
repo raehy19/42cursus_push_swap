@@ -93,4 +93,6 @@ void	ft_cal_cmds(t_stack *a, t_stack *b, t_cmds *cmds);
 
 void	ft_cal_cmd_cnt(t_cmds *cmds);
 
+void	ft_execute_min_cnt_cmds(t_stack *a, t_stack *b, t_cmds *cmds, int size);
+
 #endif

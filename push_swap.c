@@ -120,7 +120,6 @@ int	main(int ac, char **av)
 	ft_parse_data(&a, ac, av);
 	ft_stack_find_lis(&a);
 
-
 	// debug
 	t_node	*temp;
 	temp = a.head;
@@ -146,12 +145,12 @@ int	main(int ac, char **av)
 		// debug start
 		for (int k = 0; k < a.size + b.size; ++k)
 		{
-			printf("%5d %5d %5d %5d %5d %5d cnt: %5d\n",cmds[k].ra, cmds[k].rra,cmds[k].rb,cmds[k].rrb,cmds[k].rr,cmds[k].rrr,cmds[k].cmd_cnt);
+			printf("%5d %5d %5d %5d %5d %5d   cnt: %5d\n",cmds[k].ra, cmds[k].rra,cmds[k].rb,cmds[k].rrb,cmds[k].rr,cmds[k].rrr,cmds[k].cmd_cnt);
 		}
-		break;
+//		break;
 		// debug end
 
-
+		ft_execute_min_cnt_cmds(&a, &b, cmds, ac - 1);
 		// check shortest cmd
 		free(cmds);
 	}
@@ -162,11 +161,36 @@ int	main(int ac, char **av)
 //		ft_final_sort(&a);
 
 
-	ft_final_sort(&a);
+//	ft_final_sort(&a);
 
 
 //	// debug
 	//print a
+	printf("stack %c\n", a.stack_name);
+	temp = a.head;
+	for (int k = 0; k < a.size; ++k)
+	{
+		printf("%10d %10d %10d\n", temp->data, temp->order, temp->is_sort);
+		temp = temp->next;
+	}
+	printf("\na stack size : %d\n\n", a.size);
+
+
+	//print b
+	printf("stack %c\n", b.stack_name);
+	temp = b.head;
+	for (int k = 0; k < b.size; ++k)
+	{
+		printf("%10d %10d %10d\n", temp->data, temp->order, temp->is_sort);
+		temp = temp->next;
+	}
+	printf("\nb stack size : %d\n\n", b.size);
+
+
+	printf("\n===== final_sort =====\n");
+	ft_final_sort(&a);
+
+
 	printf("stack %c\n", a.stack_name);
 	temp = a.head;
 	for (int k = 0; k < a.size; ++k)
