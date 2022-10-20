@@ -44,6 +44,8 @@ void	ft_swap(t_stack *stack)
 void	ft_push(t_stack *to_pop, t_stack *to_push)
 {
 	ft_push_stack_node(to_push, ft_pop_stack_node(to_pop));
+	if (to_push->stack_name == 'a')
+		to_push->head->is_sort = 1;
 	write(STDOUT_FILENO, "p", 1);
 	write(STDOUT_FILENO, &(to_push->stack_name), 1);
 	write(STDOUT_FILENO, "\n", 1);
