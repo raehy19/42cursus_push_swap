@@ -14,15 +14,19 @@
 
 void	ft_rotate_rotate(t_stack *stack1, t_stack *stack2)
 {
-	stack1->head = stack1->head->next;
-	stack2->head = stack2->head->next;
+	if (stack1->size > 1)
+		stack1->head = stack1->head->next;
+	if (stack2->size > 1)
+		stack2->head = stack2->head->next;
 	write(STDOUT_FILENO, "rr\n", 3);
 }
 
 void	ft_reverse_rotate_rotate(t_stack *stack1, t_stack *stack2)
 {
-	stack1->head = stack1->head->prev;
-	stack2->head = stack2->head->prev;
+	if (stack1->size > 1)
+		stack1->head = stack1->head->prev;
+	if (stack2->size > 1)
+		stack2->head = stack2->head->prev;
 	write(STDOUT_FILENO, "rrr\n", 4);
 }
 
@@ -31,13 +35,19 @@ void	ft_swap_swap(t_stack *stack1, t_stack *stack2)
 	t_node	*temp1;
 	t_node	*temp2;
 
-	temp1 = ft_pop_stack_node(stack1);
-	temp2 = ft_pop_stack_node(stack2);
-	stack1->head = stack1->head->next;
-	stack2->head = stack2->head->next;
-	ft_push_stack_node(stack1, temp1);
-	ft_push_stack_node(stack2, temp2);
-	stack1->head = stack1->head->prev;
-	stack2->head = stack2->head->prev;
+	if (stack1->size > 1)
+	{
+		temp1 = ft_pop_stack_node(stack1);
+		stack1->head = stack1->head->next;
+		ft_push_stack_node(stack1, temp1);
+		stack1->head = stack1->head->prev;
+	}
+	if (stack2->size > 1)
+	{
+		temp2 = ft_pop_stack_node(stack2);
+		stack2->head = stack2->head->next;
+		ft_push_stack_node(stack2, temp2);
+		stack2->head = stack2->head->prev;
+	}
 	write(STDOUT_FILENO, "ss\n", 3);
 }
