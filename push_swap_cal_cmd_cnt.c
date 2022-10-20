@@ -24,14 +24,14 @@ void	ft_cmd_optimize_ra_rb(t_cmds *cmds)
 	if (cmds->ra > cmds->rb)
 	{
 		cmds->rr = cmds->rb;
-		cmds->rb = 0;
 		cmds->ra -= cmds->rb;
+		cmds->rb = 0;
 	}
 	else
 	{
 		cmds->rr = cmds->ra;
-		cmds->ra = 0;
 		cmds->rb -= cmds->ra;
+		cmds->ra = 0;
 	}
 	cmds->rra = 0;
 	cmds->rrb = 0;
@@ -42,14 +42,14 @@ void	ft_cmd_optimize_rra_rrb(t_cmds *cmds)
 	if (cmds->rra > cmds->rrb)
 	{
 		cmds->rrr = cmds->rrb;
-		cmds->rrb = 0;
 		cmds->rra -= cmds->rrb;
+		cmds->rrb = 0;
 	}
 	else
 	{
 		cmds->rrr = cmds->rra;
-		cmds->rra = 0;
 		cmds->rrb -= cmds->rra;
+		cmds->rra = 0;
 	}
 	cmds->ra = 0;
 	cmds->rb = 0;
