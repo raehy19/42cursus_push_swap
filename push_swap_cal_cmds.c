@@ -40,8 +40,8 @@ void	ft_cal_cmds_a(t_stack *a, t_stack *b, t_cmds *cmds)
 			(cmds + i)->to_pop = a;
 			(cmds + i)->to_push = b;
 			ft_cal_r_to_pop(a, i, cmds + i);
-			if (b->size > 2)
-				ft_cal_r_push_b(temp->order, b, cmds + i);
+			if (b->size > 1)
+				ft_cal_r_push_b(temp->order, b, cmds + i, a->size + b->size);
 			ft_cal_cmd_cnt(cmds + i);
 		}
 		else

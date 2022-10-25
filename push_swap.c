@@ -128,16 +128,11 @@ int	main(int ac, char **av)
 //		temp = temp->next;
 //	}
 //	printf("\nstack size : %d\n", a.size);
+//
 
-
-	// b 정렬 확인 :
-	// 1. order가 b에서 가장 길다면 head < order && tail < order
-	// 2. 아닐 경우 head < order && tail > order 일때 삽입
-
-	// test : push unsorted to b & swap if can
+//	ft_is_swappable(&a);
 	while (ft_count_unsorted(&a) + ft_count_unsorted(&b) > 0)
 	{
-		ft_is_swappable(&a);
 		ft_init_cmds(&cmds, a.size + b.size); // == ac - 1 ?
 		ft_cal_cmds(&a, &b, cmds);
 
@@ -146,21 +141,15 @@ int	main(int ac, char **av)
 //		{
 //			printf("%5d %5d %5d %5d %5d %5d   cnt: %5d\n",cmds[k].ra, cmds[k].rra,cmds[k].rb,cmds[k].rrb,cmds[k].rr,cmds[k].rrr,cmds[k].cmd_cnt);
 //		}
-////		break;
 //		// debug end
 
 		ft_execute_min_cnt_cmds(&a, &b, cmds, ac - 1);
 		// check shortest cmd
 		free(cmds);
+//		ft_is_swappable(&a);
 	}
 
-
-//	printf("\nunsorted : %d\n", ft_count_unsorted(&a));
-//	if (ft_count_unsorted(&a) == 0)
-//		ft_final_sort(&a);
-
-
-//	ft_final_sort(&a);
+	ft_final_sort(&a);
 
 
 ////	// debug
@@ -184,11 +173,6 @@ int	main(int ac, char **av)
 //		temp = temp->next;
 //	}
 //	printf("\nb stack size : %d\n\n", b.size);
-
-
-//	printf("\n===== final_sort =====\n");
-	ft_final_sort(&a);
-
 //
 //	printf("stack %c\n", a.stack_name);
 //	temp = a.head;
@@ -210,6 +194,6 @@ int	main(int ac, char **av)
 //	}
 //	printf("\nb stack size : %d\n\n", b.size);
 //	//end debug
-//
+
 	return (0);
 }

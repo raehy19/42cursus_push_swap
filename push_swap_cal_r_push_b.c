@@ -12,48 +12,66 @@
 
 #include "push_swap.h"
 
-int	ft_is_order_biggest(int order, t_stack *stack)
+typedef struct s_max_order
 {
-	t_node	*temp;
+	int	order;
+	int	idx;
+}	t_max_order;
+
+void	ft_cal_locate_b(t_max_order *max, t_stack *b, int order)
+{
+	t_node	*tmp;
 	int		i;
 
+	tmp = b->head;
 	i = -1;
-	temp = stack->head;
-	while (++i < stack->size)
+	while (++i < b->size)
 	{
-		if (temp->order > order)
-			return (0);
-		temp = temp->next;
+		if (tmp->order < order && tmp->order > max->order)
+		{
+			max->order = tmp->order;
+			max->idx = i;
+		}
+		tmp = tmp->next;
 	}
-	return (1);
 }
 
-void	ft_cal_r_push_b(int order, t_stack *b, t_cmds *cmds)
+void	ft_find_max(t_max_order *max, t_stack *b)
 {
-	t_node	*temp;
+	t_node	*tmp;
 	int		i;
 
-	temp = b->head;
-	i = -1;
-	if (ft_is_order_biggest(order, b) == 1)
+	tmp = b->head->next;
+	max->order = b->head->order;
+	max->idx = 0;
+	i = 0;
+	while (++i < b->size)
 	{
-		while (++i < b->size)
+		if (tmp->order > max->order)
 		{
-			if (temp->prev->order < order && temp->order < order)
-				break ;
-			temp = temp->next;
+			max->order = tmp->order;
+			max->idx = i;
 		}
+		tmp = tmp->next;
 	}
-	else
+}
+
+void	ft_cal_r_push_b(int order, t_stack *b, t_cmds *cmds, int max_order)
+{
+	t_max_order	max;
+
+	max = (t_max_order) {-1, -1};
+	ft_cal_locate_b(&max, b, order);
+	if (max.idx == -1)
+		ft_find_max(&max, b);
+	cmds->rb = max.idx;
+	cmds->rrb = b->size - max.idx;
+	if (b->size > max_order / 2)
 	{
-		while (++i < b->size)
-		{
-			if (temp->prev->order > order && temp->order < order)
-				break ;
-			temp = temp->next;
-		}
+		cmds->rb = 0;
+		cmds->rrb = 0;
 	}
-	cmds->rb = i;
-	cmds->rrb = b->size - i;
+
+//	printf("\nmax idx, order: %d %d\n\n", max.idx, max.order);
 }
 

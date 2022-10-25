@@ -32,7 +32,6 @@ PUSH_SWAP_SRCS := \
 	push_swap_execute_functions.c \
 
 
-
 PUSH_SWAP_SRCS_BONUS := \
 
 all : $(NAME)

@@ -27,7 +27,7 @@ int	ft_min(int a, int b)
 	return (b);
 }
 
-void	ft_cal_locate(t_u_max_o_min *data, t_stack *a, int order)
+void	ft_cal_locate_a(t_u_max_o_min *data, t_stack *a, int order)
 {
 	t_node	*tmp;
 	int		i;
@@ -92,7 +92,7 @@ void	ft_cal_r_push_a(int order, t_stack *a, t_cmds *cmds, int max_order)
 	t_u_max_o_min	data;
 
 	data = (t_u_max_o_min) {-1, -1, max_order, -1};
-	ft_cal_locate(&data, a, order);
+	ft_cal_locate_a(&data, a, order);
 	if (data.u_max_idx == -1 || data.o_min_idx == -1)
 	{
 		data = (t_u_max_o_min) {-1, -1, max_order, -1};
