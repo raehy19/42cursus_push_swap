@@ -13,7 +13,7 @@
 NAME := push_swap
 BONUS_NAME := checker
 CC := cc
-CFLAGS := -g  -Wall -Wextra -Werror
+CFLAGS := -g  -Wall -Wextra -Werror -MMD  -MP
 RM := rm -f
 
 PUSH_SWAP_SRCS := \
@@ -31,8 +31,8 @@ PUSH_SWAP_SRCS := \
 	push_swap_cal_cmd_cnt.c \
 	push_swap_execute_functions.c \
 
-
 PUSH_SWAP_SRCS_BONUS := \
+	checker.c \
 
 all : $(NAME)
 
@@ -40,11 +40,13 @@ bonus : $(BONUS_NAME)
 
 PUSH_SWAP_OBJS := $(PUSH_SWAP_SRCS:.c=.o)
 
-PUSH_SWAP_OBJS_BONUS := $(PRINTF_SRCS_BONUS:.c=.o)
+PUSH_SWAP_OBJS_BONUS := $(PUSH_SWAP_SRCS_BONUS:.c=.o)
 
 PUSH_SWAP_DEPS := $(PUSH_SWAP_SRCS:.c=.d)
 
-PUSH_SWAP_DEPS_BONUS := $(PRINTF_SRCS_BONUS:.c=.d)
+PUSH_SWAP_DEPS_BONUS := $(PUSH_SWAP_SRCS_BONUS:.c=.d)
+
+-include $(PUSH_SWAP_DEPS) $(PUSH_SWAP_DEPS_BONUS)
 
 clean :
 	$(RM) $(PUSH_SWAP_OBJS)
@@ -59,15 +61,11 @@ fclean : clean
 re : fclean
 	make all
 
--include $(PUSH_SWAP_DEPS) $(PUSH_SWAP_DEPS_BONUS)
-
 $(NAME) : $(PUSH_SWAP_OBJS)
-	$(CC) -o $@ $^
+	$(CC) $^ -o $@
 
 $(BONUS_NAME) : $(PUSH_SWAP_OBJS_BONUS)
-
-run : $(NAME)
-	./$(NAME)
+	$(CC) $^ -o $@
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
