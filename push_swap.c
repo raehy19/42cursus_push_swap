@@ -133,6 +133,9 @@ int	main(int ac, char **av)
 //	ft_is_swappable(&a);
 	while (ft_count_unsorted(&a) + ft_count_unsorted(&b) > 0)
 	{
+//		ft_is_swappable(&a);
+		if (ft_count_unsorted(&a) + ft_count_unsorted(&b) == 0)
+			break ;
 		ft_init_cmds(&cmds, a.size + b.size); // == ac - 1 ?
 		ft_cal_cmds(&a, &b, cmds);
 

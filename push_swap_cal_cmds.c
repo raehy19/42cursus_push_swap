@@ -65,6 +65,8 @@ void	ft_cal_cmds_b(t_stack *a, t_stack *b, t_cmds *cmds)
 		ft_cal_r_push_a(temp->order, a, cmds + i, a->size + b->size);
 		ft_cal_cmd_cnt(cmds + i);
 		temp = temp->next;
+		if (ft_count_unsorted(a) > 0 && ft_count_unsorted(a) > 0)
+			(cmds + i)->cmd_cnt = -1;
 	}
 }
 
