@@ -48,7 +48,7 @@ void	ft_cal_cmds_b(t_stack *a, t_stack *b, t_cmds *cmds)
 		(cmds + i)->to_pop = b;
 		(cmds + i)->to_push = a;
 		ft_cal_r_to_pop(b, i, cmds + i);
-		ft_cal_r_push_a(temp->order, a, cmds + i);
+		ft_cal_r_push_a(temp->order, a, cmds + i, a->size + b->size);
 		ft_cal_cmd_cnt(cmds + i);
 		temp = temp->next;
 	}

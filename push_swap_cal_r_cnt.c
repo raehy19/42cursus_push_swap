@@ -71,27 +71,88 @@ void	ft_cal_r_push_b(int order, t_stack *b, t_cmds *cmds)
 	cmds->rrb = b->size - i;
 }
 
-void	ft_cal_r_push_a(int order, t_stack *a, t_cmds *cmds)
+
+// push a
+
+typedef struct s_u_max_o_min
 {
-	t_node	*temp;
+	int	under_max;
+	int	under_max_idx;
+	int	over_min;
+	int	over_min_idx;
+}	t_u_max_o_min;
+
+int	ft_min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+void	ft_is_max_or_min(t_u_max_o_min *data, t_stack *a, int order)
+{
+	t_node	*tmp;
 	int		i;
 
-	temp = a->head;
+	tmp = a->head;
 	i = -1;
 	while (++i < a->size)
 	{
-		if (temp->prev->is_sort == 1 && temp->prev->order > order)
-			break ;
-		temp = temp->next;
+		if (tmp->is_sort == 1 && tmp->order > data->under_max)
+		{
+			data->under_max = tmp->order;
+			data->under_max_idx = i;
+		}
+		if (tmp->is_sort == 1 && tmp->order < data->over_min)
+		{
+			data->over_min = tmp->order;
+			data->over_min_idx = i;
+		}
+		tmp = tmp->next;
 	}
-	cmds->rra = a->size - i;
-	temp = a->head;
+}
+
+void	ft_cal_cmds_push_a(t_u_max_o_min *data, int a_size, t_cmds *cmds)
+{
+
+}
+
+void	ft_cal_locate(t_u_max_o_min *data, t_stack *a, int order)
+{
+	t_node	*tmp;
+	int		i;
+
+	tmp = a->head;
 	i = -1;
 	while (++i < a->size)
 	{
-		if (temp->is_sort == 1 && temp->order < order)
-			break ;
-		temp = temp->prev;
+		if (tmp->is_sort == 1
+			&& tmp->order < order && tmp->order > data->under_max)
+		{
+			data->under_max = tmp->order;
+			data->under_max_idx = i;
+		}
+		if (tmp->is_sort == 1
+			&& tmp->order > order && tmp->order < data->over_min)
+		{
+			data->over_min = tmp->order;
+			data->over_min_idx = i;
+		}
+		tmp = tmp->next;
 	}
-	cmds->ra = a->size - i + 1;
+}
+
+// check order location in sorted
+void	ft_cal_r_push_a(int order, t_stack *a, t_cmds *cmds, int max_order)
+{
+	t_u_max_o_min	data;
+
+	data = (t_u_max_o_min) {-1, -1, -1, max_order};
+	ft_cal_locate(&data, a, order);
+	if (data.under_max_idx == -1 || data.over_min_idx == -1)
+	{
+		data = (t_u_max_o_min) {-1, -1, -1, max_order};
+		ft_is_max_or_min(&data, a, order);
+	}
+	// cal cmds
 }
