@@ -12,6 +12,20 @@
 
 #include "push_swap.h"
 
+void	ft_cal_r_to_pop(t_stack *to_pop, int i, t_cmds *cmds)
+{
+	if (to_pop->stack_name == 'a')
+	{
+		cmds->ra = i;
+		cmds->rra = to_pop->size - i;
+	}
+	else if (to_pop->stack_name == 'b')
+	{
+		cmds->rb = i;
+		cmds->rrb = to_pop->size - i;
+	}
+}
+
 void	ft_cal_cmds_a(t_stack *a, t_stack *b, t_cmds *cmds)
 {
 	int		i;

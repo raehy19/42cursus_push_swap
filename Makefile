@@ -25,9 +25,10 @@ PUSH_SWAP_SRCS := \
 	push_swap_operations_1.c \
 	push_swap_operations_2.c \
 	push_swap_ft_is_swappable.c \
-	push_swap_cal_cmd_cnt.c \
 	push_swap_cal_cmds.c \
-	push_swap_cal_r_cnt.c \
+	push_swap_cal_r_push_a.c \
+	push_swap_cal_r_push_b.c \
+	push_swap_cal_cmd_cnt.c \
 	push_swap_execute_functions.c \
 
 

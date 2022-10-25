@@ -85,7 +85,6 @@ void	ft_stack_find_lis(t_stack *a);
 
 void	ft_is_swappable(t_stack *a);
 
-void	ft_cal_r_to_pop(t_stack *to_pop, int i, t_cmds *cmds);
 void	ft_cal_r_push_b(int order, t_stack *b, t_cmds *cmds);
 void	ft_cal_r_push_a(int order, t_stack *a, t_cmds *cmds, int max_order);
 
