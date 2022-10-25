@@ -61,13 +61,32 @@ void	ft_cal_cmds_b(t_stack *a, t_stack *b, t_cmds *cmds)
 	{
 		(cmds + i)->to_pop = b;
 		(cmds + i)->to_push = a;
+		(cmds + i)->priority = temp->priority;
 		ft_cal_r_to_pop(b, i, cmds + i);
 		ft_cal_r_push_a(temp->order, a, cmds + i, a->size + b->size);
 		ft_cal_cmd_cnt(cmds + i);
-		temp = temp->next;
-		if ((a->size + b->size) - ft_count_unsorted(a) > (a->size + b->size) * 1 / 5
-			&& ft_count_unsorted(a) > 0)
+		if (ft_count_unsorted(a) > 0 )
+//		&& (a->size + b->size) - ft_count_unsorted(a)
+//			> (a->size + b->size) * (1 - CRITERIA))
 			(cmds + i)->cmd_cnt = -1;
+		temp = temp->next;
+	}
+}
+
+void	ft_set_priority(t_cmds *cmds, int size)
+{
+	int	i;
+
+	i = -1;
+	while (++i < size)
+		if ((cmds + i)->priority == 1)
+			break ;
+	if (i != size)
+	{
+		i = -1;
+		while (++i < size)
+			if ((cmds + i)->priority == 0)
+				cmds->cmd_cnt = -1;
 	}
 }
 
@@ -75,4 +94,5 @@ void	ft_cal_cmds(t_stack *a, t_stack *b, t_cmds *cmds)
 {
 	ft_cal_cmds_a(a, b, cmds);
 	ft_cal_cmds_b(a, b, cmds + a->size);
+	ft_set_priority(cmds + a->size, b->size);
 }

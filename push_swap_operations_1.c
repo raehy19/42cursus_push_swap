@@ -53,6 +53,9 @@ void	ft_push(t_stack *to_pop, t_stack *to_push)
 		ft_push_stack_node(to_push, ft_pop_stack_node(to_pop));
 		if (to_push->stack_name == 'a')
 			to_push->head->is_sort = 1;
+		if (to_push->stack_name == 'b'
+			&& to_push->size > (to_pop->size + to_push->size) * 4 / 5 + 1)
+			to_push->head->priority = 1;
 	}
 	write(STDOUT_FILENO, "p", 1);
 	write(STDOUT_FILENO, &(to_push->stack_name), 1);

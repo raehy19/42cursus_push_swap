@@ -47,6 +47,7 @@ void	ft_push_stack_data(t_stack *stack, int data)
 	node->data = data;
 	node->order = 0;
 	node->is_sort = 0;
+	node->priority = 0;
 	node->prev = NULL;
 	node->next = NULL;
 	ft_push_stack_node(stack, node);

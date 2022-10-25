@@ -105,6 +105,7 @@ void	ft_init_cmds(t_cmds **cmds, int size)
 		((*cmds) + i)->to_pop = NULL;
 		((*cmds) + i)->to_push = NULL;
 		((*cmds) + i)->cmd_cnt = 0;
+		((*cmds) + i)->priority = 0;
 	}
 }
 
@@ -133,7 +134,7 @@ int	main(int ac, char **av)
 //	ft_is_swappable(&a);
 	while (ft_count_unsorted(&a) + ft_count_unsorted(&b) > 0)
 	{
-//		ft_is_swappable(&a);
+		ft_is_swappable(&a);
 		if (ft_count_unsorted(&a) + ft_count_unsorted(&b) == 0)
 			break ;
 		ft_init_cmds(&cmds, a.size + b.size); // == ac - 1 ?

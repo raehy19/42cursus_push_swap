@@ -19,6 +19,8 @@
 # include <unistd.h>
 # include <limits.h>
 
+# define CRITERIA 1
+
 typedef struct s_node	t_node;
 
 struct s_node
@@ -26,6 +28,7 @@ struct s_node
 	int		data;
 	int		order;
 	int		is_sort;
+	int		priority;
 	t_node	*prev;
 	t_node	*next;
 };
@@ -61,6 +64,7 @@ typedef struct s_cmds
 	t_stack	*to_pop;
 	t_stack	*to_push;
 	int		cmd_cnt;
+	int		priority;
 }	t_cmds;
 
 void	ft_error(int error_code);
