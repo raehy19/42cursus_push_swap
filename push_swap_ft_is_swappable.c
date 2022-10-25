@@ -21,10 +21,10 @@ int	ft_check_prev_swap(t_node *node)
 		prev = prev->prev;
 	if ((node->is_sort == 1 && node->next->is_sort == 0)
 		&& ((node->next->order < node->order
-		&& prev->order < node->next->order)
-		|| ((prev->order > node->order)
-		&& (node->next->order > prev->order
-		|| node->next->order < node->order))))
+				&& prev->order < node->next->order)
+			|| ((prev->order > node->order)
+				&& (node->next->order > prev->order
+					|| node->next->order < node->order))))
 		return (1);
 	return (0);
 }
@@ -38,10 +38,10 @@ int	ft_check_next_swap(t_node *node)
 		next = next->next;
 	if ((node->is_sort == 0 && node->next->is_sort == 1)
 		&& ((node->next->order < node->order
-		&& node->next->order < next->order)
-		|| ((next->order < node->next->order)
-		&& (node->order > next->order
-		|| node->order > node->next->order))))
+				&& node->next->order < next->order)
+			|| ((next->order < node->next->order)
+				&& (node->order > next->order
+					|| node->order > node->next->order))))
 		return (1);
 	return (0);
 }

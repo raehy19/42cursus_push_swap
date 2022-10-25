@@ -83,6 +83,8 @@ void	ft_swap(t_stack *stack);
 
 void	ft_stack_find_lis(t_stack *a);
 
+int		ft_count_unsorted(t_stack *stack);
+
 void	ft_is_swappable(t_stack *a);
 
 void	ft_cal_r_push_b(int order, t_stack *b, t_cmds *cmds, int max_order);
@@ -93,7 +95,5 @@ void	ft_cal_cmds(t_stack *a, t_stack *b, t_cmds *cmds);
 void	ft_cal_cmd_cnt(t_cmds *cmds);
 
 void	ft_execute_min_cnt_cmds(t_stack *a, t_stack *b, t_cmds *cmds, int size);
-
-int	ft_count_unsorted(t_stack *stack);
 
 #endif
