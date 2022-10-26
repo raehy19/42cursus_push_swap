@@ -57,7 +57,8 @@ int	ft_atoi(const char *str)
 	while (ft_isdigit(*(str + i)))
 	{
 		result = result * 10 + (unsigned long long)(*(str + i) - '0');
-		if (result > INT_MAX)
+		if ((sign == 1 && result > INT_MAX)
+			|| (sign == -1 && result > (unsigned long long )INT_MAX + 1))
 			ft_error(5);
 		++i;
 	}
