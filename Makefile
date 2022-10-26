@@ -18,6 +18,7 @@ RM := rm -f
 
 PUSH_SWAP_SRCS := \
 	push_swap.c \
+	ft_error.c \
 	push_swap_utils.c \
 	push_swap_ft_atoi.c \
 	push_swap_lis_1.c \
@@ -34,6 +35,8 @@ PUSH_SWAP_SRCS := \
 
 PUSH_SWAP_SRCS_BONUS := \
 	checker.c \
+	checker_get_next_line.c \
+	ft_error.c \
 
 all : $(NAME)
 
