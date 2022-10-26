@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include <limits.h>
 
-# define CRITERIA 1
+# define CRITERIA 0.5
 
 typedef struct s_node	t_node;
 

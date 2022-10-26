@@ -66,7 +66,7 @@ void	ft_cal_r_push_b(int order, t_stack *b, t_cmds *cmds, int max_order)
 		ft_find_max(&max, b);
 	cmds->rb = max.idx;
 	cmds->rrb = b->size - max.idx;
-	if (b->size > max_order * 4 / 5)
+	if (b->size > max_order * CRITERIA)
 	{
 		cmds->rb = 0;
 		cmds->rrb = 0;

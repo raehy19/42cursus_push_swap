@@ -65,9 +65,8 @@ void	ft_cal_cmds_b(t_stack *a, t_stack *b, t_cmds *cmds)
 		ft_cal_r_to_pop(b, i, cmds + i);
 		ft_cal_r_push_a(temp->order, a, cmds + i, a->size + b->size);
 		ft_cal_cmd_cnt(cmds + i);
-		if (ft_count_unsorted(a) > 0 )
-//		&& (a->size + b->size) - ft_count_unsorted(a)
-//			> (a->size + b->size) * (1 - CRITERIA))
+		if (ft_count_unsorted(a) > 0
+			&& b->size < (a->size + b->size) * CRITERIA)
 			(cmds + i)->cmd_cnt = -1;
 		temp = temp->next;
 	}
@@ -86,7 +85,7 @@ void	ft_set_priority(t_cmds *cmds, int size)
 		i = -1;
 		while (++i < size)
 			if ((cmds + i)->priority == 0)
-				cmds->cmd_cnt = -1;
+				(cmds + i)->cmd_cnt = -1;
 	}
 }
 

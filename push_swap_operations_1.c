@@ -54,7 +54,7 @@ void	ft_push(t_stack *to_pop, t_stack *to_push)
 		if (to_push->stack_name == 'a')
 			to_push->head->is_sort = 1;
 		if (to_push->stack_name == 'b'
-			&& to_push->size > (to_pop->size + to_push->size) * 4 / 5 + 1)
+			&& to_push->size > (to_pop->size + to_push->size) * CRITERIA + 1)
 			to_push->head->priority = 1;
 	}
 	write(STDOUT_FILENO, "p", 1);
