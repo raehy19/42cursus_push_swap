@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include <limits.h>
 
-# define CRITERIA 0.5
+# define CRITERIA 0.4
 
 typedef struct s_node	t_node;
 
@@ -68,8 +68,13 @@ typedef struct s_cmds
 }	t_cmds;
 
 void	ft_error(int error_code);
-
 int		ft_atoi(const char *str);
+
+void	ft_parse_data(t_stack *a, int ac, char **av);
+int		ft_count_unsorted(t_stack *stack);
+void	ft_init_cmds(t_cmds **cmds, int size);
+int		ft_if_three_node(t_stack *a, t_stack *b);
+void	ft_final_sort(t_stack *stack);
 
 void	ft_init_stack(t_stack *stack, char stack_name);
 void	ft_push_stack_node(t_stack *stack, t_node *node);
@@ -86,8 +91,6 @@ void	ft_swap_swap(t_stack *stack1, t_stack *stack2);
 void	ft_swap(t_stack *stack);
 
 void	ft_stack_find_lis(t_stack *a);
-
-int		ft_count_unsorted(t_stack *stack);
 
 void	ft_is_swappable(t_stack *a);
 

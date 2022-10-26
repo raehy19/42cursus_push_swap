@@ -6,7 +6,7 @@
 /*   By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 12:46:53 by rjeong            #+#    #+#             */
-/*   Updated: 2022/10/25 12:46:55 by rjeong           ###   ########.fr       */
+/*   Updated: 2022/10/26 17:20:02 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_cal_r_push_b(int order, t_stack *b, t_cmds *cmds, int max_order)
 {
 	t_max_order	max;
 
-	max = (t_max_order) {-1, -1};
+	max = (t_max_order){-1, -1};
 	ft_cal_locate_b(&max, b, order);
 	if (max.idx == -1)
 		ft_find_max(&max, b);
@@ -72,4 +72,3 @@ void	ft_cal_r_push_b(int order, t_stack *b, t_cmds *cmds, int max_order)
 		cmds->rrb = 0;
 	}
 }
-

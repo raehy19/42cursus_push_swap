@@ -18,6 +18,7 @@ RM := rm -f
 
 PUSH_SWAP_SRCS := \
 	push_swap.c \
+	push_swap_utils.c \
 	push_swap_ft_atoi.c \
 	push_swap_lis_1.c \
 	push_swap_lis_2.c \

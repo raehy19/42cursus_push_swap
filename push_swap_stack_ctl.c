@@ -6,7 +6,7 @@
 /*   By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:17:40 by rjeong            #+#    #+#             */
-/*   Updated: 2022/10/14 21:31:11 by rjeong           ###   ########.fr       */
+/*   Updated: 2022/10/26 17:20:35 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,15 @@ void	ft_clear_stack(t_stack *stack)
 {
 	t_node	*temp;
 
-	temp = stack->head;
-	while (--(stack->size) > 0)
+	if (stack->size > 0)
 	{
-		free(temp->prev);
-		temp = temp->next;
+		temp = stack->head;
+		while (--(stack->size) > 0)
+		{
+			temp = temp->next;
+			free(temp->prev);
+		}
+		free(temp);
+		stack->head = NULL;
 	}
-	free(temp);
-	stack->head = NULL;
 }

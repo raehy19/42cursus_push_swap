@@ -6,7 +6,7 @@
 /*   By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 22:08:47 by rjeong            #+#    #+#             */
-/*   Updated: 2022/10/19 22:08:48 by rjeong           ###   ########.fr       */
+/*   Updated: 2022/10/26 17:19:54 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,22 +80,19 @@ void	ft_cal_cmds_push_a(t_u_max_o_min *data, int a_size, t_cmds *cmds)
 	data->u_max_idx += 1;
 	if (data->u_max_idx == a_size)
 		data->u_max_idx -= a_size;
-//	printf("\numax : %d omin : %d\n", data->u_max_idx, data->o_min_idx);
 	cmds->ra = ft_min(data->u_max_idx, data->o_min_idx);
 	cmds->rra = ft_min(a_size - data->u_max_idx, a_size - data->o_min_idx);
-//	printf("\nra : %d rra : %d\n", cmds->ra, cmds->rra);
 }
 
-// check order location in sorted
 void	ft_cal_r_push_a(int order, t_stack *a, t_cmds *cmds, int max_order)
 {
 	t_u_max_o_min	data;
 
-	data = (t_u_max_o_min) {-1, -1, max_order, -1};
+	data = (t_u_max_o_min){-1, -1, max_order, -1};
 	ft_cal_locate_a(&data, a, order);
 	if (data.u_max_idx == -1 || data.o_min_idx == -1)
 	{
-		data = (t_u_max_o_min) {-1, -1, max_order, -1};
+		data = (t_u_max_o_min){-1, -1, max_order, -1};
 		ft_is_max_or_min(&data, a);
 	}
 	ft_cal_cmds_push_a(&data, a->size, cmds);
