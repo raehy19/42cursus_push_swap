@@ -38,9 +38,9 @@ int	ft_check_next_swap(t_node *node)
 		next = next->next;
 	if ((node->is_sort == 0 && node->next->is_sort == 1)
 		&& ((node->next->order < node->order
-				&& node->next->order < next->order)
+				&& node->order < next->order)
 			|| ((next->order < node->next->order)
-				&& (node->order > next->order
+				&& (node->order < next->order
 					|| node->order > node->next->order))))
 		return (1);
 	return (0);
@@ -55,18 +55,6 @@ void	ft_is_swappable(t_stack *a)
 	}
 	if (ft_check_next_swap(a->head))
 	{
-		ft_swap(a);
-		a->head->next->is_sort = 1;
-	}
-	if (ft_check_prev_swap(a->head->next))
-	{
-		ft_rotate(a);
-		ft_swap(a);
-		a->head->is_sort = 1;
-	}
-	if (ft_check_next_swap(a->head->next))
-	{
-		ft_rotate(a);
 		ft_swap(a);
 		a->head->next->is_sort = 1;
 	}

@@ -131,7 +131,6 @@ int	main(int ac, char **av)
 //	printf("\nstack size : %d\n", a.size);
 //
 
-//	ft_is_swappable(&a);
 	while (ft_count_unsorted(&a) + ft_count_unsorted(&b) > 0)
 	{
 		ft_is_swappable(&a);
@@ -154,7 +153,7 @@ int	main(int ac, char **av)
 	}
 
 	ft_final_sort(&a);
-
+	ft_clear_stack(&a);
 
 ////	// debug
 //	//print a
