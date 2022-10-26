@@ -39,6 +39,8 @@ t_lis_orders	ft_lis_list_ret(t_lis_data *arr, int len)
 			max_idx = i;
 	ret.size = (arr + max_idx)->i_len;
 	ret.lis_orders = (int *) malloc(sizeof(int) * (arr + max_idx)->i_len);
+	if (!ret.lis_orders)
+		ft_error(3);
 	i = -1;
 	while (++i < ret.size)
 	{

@@ -44,6 +44,8 @@ void	ft_push_stack_data(t_stack *stack, int data)
 	t_node	*node;
 
 	node = (t_node *) malloc(sizeof(t_node));
+	if (!node)
+		ft_error(3);
 	node->data = data;
 	node->order = 0;
 	node->is_sort = 0;
