@@ -1,6 +1,3 @@
 #!/bin/bash
 
-RAND=$(python3 randgen.py)
-
-./push_swap $RAND
-
+seq 500 | sort -R | xargs ./push_swap
