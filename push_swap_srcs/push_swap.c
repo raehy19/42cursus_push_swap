@@ -18,6 +18,8 @@ int	main(int ac, char **av)
 	t_stack	b;
 	t_cmds	*cmds;
 
+	if (ac < 2)
+		return (0);
 	ft_init_stack(&a, 'a');
 	ft_init_stack(&b, 'b');
 	ft_parse_data(&a, ac, av);
