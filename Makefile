@@ -35,9 +35,13 @@ PUSH_SWAP_SRCS := \
 
 PUSH_SWAP_SRCS_BONUS := \
 	checker.c \
-	ft_error.c \
 	ft_atoi.c \
-	checker_get_next_line.c \
+	ft_error.c \
+	ft_strcmp.c \
+	get_next_line.c \
+	checker_operations_1.c \
+	checker_operations_2.c \
+	checker_stack_ctl.c \
 
 all : $(NAME)
 
