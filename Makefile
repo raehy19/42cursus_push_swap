@@ -13,7 +13,7 @@
 NAME := push_swap
 BONUS_NAME := checker
 CC := cc
-CFLAGS := -g  -Wall -Wextra -Werror -MMD -MP
+CFLAGS := -Wall -Wextra -Werror -MMD -MP
 RM := rm -f
 
 PUSH_SWAP_SRCS := \
@@ -83,4 +83,4 @@ $(BONUS_NAME) : $(PUSH_SWAP_OBJS_BONUS)
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY : all bonus clean fclean re
+.PHONY : all bonus both clean fclean re
