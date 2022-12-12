@@ -47,6 +47,10 @@ all : $(NAME)
 
 bonus : $(BONUS_NAME)
 
+both :
+	make all
+	make bonus
+
 PUSH_SWAP_OBJS := $(addprefix push_swap_srcs/, $(PUSH_SWAP_SRCS:.c=.o))
 
 PUSH_SWAP_OBJS_BONUS := $(addprefix checker_srcs/, $(PUSH_SWAP_SRCS_BONUS:.c=.o))
