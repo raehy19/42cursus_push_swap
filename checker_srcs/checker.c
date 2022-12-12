@@ -95,8 +95,8 @@ int	main(int ac, char **av)
 
 	if (ac < 2)
 		return (0);
-	ft_init_stack(&a, 'a');
-	ft_init_stack(&b, 'b');
+	ft_init_stack(&a);
+	ft_init_stack(&b);
 	ft_parse_data(&a, ac, av);
 	str = get_next_line(STDIN_FILENO);
 	while (str)

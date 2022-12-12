@@ -38,7 +38,7 @@ int		ft_atoi(const char *str);
 char	*get_next_line(int fd);
 int		ft_strcmp(char *s1, char *s2);
 
-void	ft_init_stack(t_stack *stack, char stack_name);
+void	ft_init_stack(t_stack *stack);
 void	ft_push_stack_node(t_stack *stack, t_node *node);
 void	ft_push_stack_data(t_stack *stack, int data);
 t_node	*ft_pop_stack_node(t_stack *stack);
