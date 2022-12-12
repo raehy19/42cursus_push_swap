@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_srcs.c                                          :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "checker.h"
-
 
 void	ft_parse_data(t_stack *a, int ac, char **av)
 {
@@ -43,25 +42,25 @@ void	execute_cmd(char *str, t_stack *a, t_stack *b)
 {
 	if (ft_strcmp(str, "sa\n") == 0)
 		ft_swap(a);
-	if (ft_strcmp(str, "sb\n") == 0)
+	else if (ft_strcmp(str, "sb\n") == 0)
 		ft_swap(b);
-	if (ft_strcmp(str, "ss\n") == 0)
+	else if (ft_strcmp(str, "ss\n") == 0)
 		ft_swap_swap(a, b);
-	if (ft_strcmp(str, "pa\n") == 0)
+	else if (ft_strcmp(str, "pa\n") == 0)
 		ft_push(b, a);
-	if (ft_strcmp(str, "pb\n") == 0)
-		ft_push(a, a);
-	if (ft_strcmp(str, "ra\n") == 0)
+	else if (ft_strcmp(str, "pb\n") == 0)
+		ft_push(a, b);
+	else if (ft_strcmp(str, "ra\n") == 0)
 		ft_rotate(a);
-	if (ft_strcmp(str, "rr\n") == 0)
+	else if (ft_strcmp(str, "rr\n") == 0)
 		ft_rotate_rotate(a, b);
-	if (ft_strcmp(str, "rb\n") == 0)
+	else if (ft_strcmp(str, "rb\n") == 0)
 		ft_rotate(b);
-	if (ft_strcmp(str, "rra\n") == 0)
+	else if (ft_strcmp(str, "rra\n") == 0)
 		ft_reverse_rotate(a);
-	if (ft_strcmp(str, "rrb\n") == 0)
+	else if (ft_strcmp(str, "rrb\n") == 0)
 		ft_reverse_rotate(b);
-	if (ft_strcmp(str, "rrr\n") == 0)
+	else if (ft_strcmp(str, "rrr\n") == 0)
 		ft_reverse_rotate_rotate(a, b);
 	else
 		ft_error(10);
@@ -107,5 +106,7 @@ int	main(int ac, char **av)
 		write(STDOUT_FILENO, "OK\n", 3);
 	else
 		write(STDOUT_FILENO, "KO\n", 3);
+	ft_clear_stack(&a);
+	ft_clear_stack(&b);
 	return (0);
 }
