@@ -13,14 +13,14 @@
 NAME := push_swap
 BONUS_NAME := checker
 CC := cc
-CFLAGS := -g  -Wall -Wextra -Werror -MMD  -MP
+CFLAGS := -g  -Wall -Wextra -Werror -MMD -MP
 RM := rm -f
 
 PUSH_SWAP_SRCS := \
 	push_swap.c \
 	ft_error.c \
+	ft_atoi.c \
 	push_swap_utils.c \
-	push_swap_ft_atoi.c \
 	push_swap_lis_1.c \
 	push_swap_lis_2.c \
 	push_swap_stack_ctl.c \
@@ -35,20 +35,21 @@ PUSH_SWAP_SRCS := \
 
 PUSH_SWAP_SRCS_BONUS := \
 	checker.c \
-	checker_get_next_line.c \
 	ft_error.c \
+	ft_atoi.c \
+	checker_get_next_line.c \
 
 all : $(NAME)
 
 bonus : $(BONUS_NAME)
 
-PUSH_SWAP_OBJS := $(PUSH_SWAP_SRCS:.c=.o)
+PUSH_SWAP_OBJS := $(addprefix push_swap_srcs/, $(PUSH_SWAP_SRCS:.c=.o))
 
-PUSH_SWAP_OBJS_BONUS := $(PUSH_SWAP_SRCS_BONUS:.c=.o)
+PUSH_SWAP_OBJS_BONUS := $(addprefix checker_srcs/, $(PUSH_SWAP_SRCS_BONUS:.c=.o))
 
-PUSH_SWAP_DEPS := $(PUSH_SWAP_SRCS:.c=.d)
+PUSH_SWAP_DEPS := $(addprefix push_swap_srcs/, $(PUSH_SWAP_SRCS:.c=.d))
 
-PUSH_SWAP_DEPS_BONUS := $(PUSH_SWAP_SRCS_BONUS:.c=.d)
+PUSH_SWAP_DEPS_BONUS := $(addprefix checker_srcs/, $(PUSH_SWAP_SRCS_BONUS:.c=.d))
 
 -include $(PUSH_SWAP_DEPS) $(PUSH_SWAP_DEPS_BONUS)
 
