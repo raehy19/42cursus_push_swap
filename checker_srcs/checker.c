@@ -102,6 +102,7 @@ int	main(int ac, char **av)
 	while (str)
 	{
 		execute_cmd(str, &a, &b);
+		free(str);
 		str = get_next_line(STDIN_FILENO);
 	}
 	if (ft_check_stacks(&a, &b) == 0)
